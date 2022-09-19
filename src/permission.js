@@ -45,6 +45,8 @@ router.beforeEach((to, from, next) => {
         } else {
           store.dispatch('getAuth').then(auths => { // 拉取user_info
             store.dispatch('GenerateRoutes', auths).then(() => { // 根据auths权限生成可访问的路由表
+              console.log(store.getters.addRouters, 'store.getters.addRouters')
+
               router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
               if (to.path === '/404') {
                 next({

@@ -130,15 +130,16 @@ const perfectRouter = function(authInfo, result) {
           }
         }
 
-
+        // 获取重定向地址
         if (element.children && element.children.length > 0) {
           const firstChild = element.children[0]
           const childPath = firstChild.meta ? firstChild.meta.redirect || firstChild.path : firstChild.path
           element.redirect = element.path + '/' + childPath
         }
 
-        // 获取跳转
+        // 获取跳转路由
         if (element.redirect) {
+          // console.log(redirect, index, 'redirect')
           if (!redirect) {
             redirect = element.redirect
           }
@@ -169,8 +170,13 @@ const perfectRouter = function(authInfo, result) {
           break
         }
       }
+      // console.log(mainRouter.type, accessedRouters, 'accessedRouters')
+
       routerObj[mainRouter.type] = accessedRouters
+      // console.log(routerObj, 'routerObj')
       addRouter = addRouter.concat(filterIgnoreRouter(accessedRouters))
+      // console.log(accessedRouters, 'accessedRouters')
+      // console.log(filterIgnoreRouter(accessedRouters), 'filterIgnoreRouter')
     }
 
     if (redirect || topRedirect) {
